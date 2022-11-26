@@ -24,7 +24,7 @@ jobs:
 
       - name: Bootstrap AWS CDK stack
         run: export CDK_NEW_BOOTSTRAP=1
-        run: cdk bootstrap aws://ACCOUNT-NUMBER/REGION ## add account num and region
+        run: cdk bootstrap aws://${{secrets.AWS_ACCOUNT}}/${{secrets.AWS_REGION}}
       
       - name: Deploy quickstart
         run: cd quickstart-aws-fintech-blueprint
