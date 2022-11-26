@@ -1,0 +1,32 @@
+name: AWS quickstart deploy
+run-name: ${{githun.actor}} is deploying fintec quickstart
+on:
+  push:
+    branches:
+      - main
+jobs:
+  quickstart:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-1
+
+      - name: Configure AWS CDK
+        run: npm install -g aws-cdk typescript
+        run: cdk --version
+
+      - name: Bootstrap AWS CDK stack
+        run: export CDK_NEW_BOOTSTRAP=1
+        run: cdk bootstrap aws://ACCOUNT-NUMBER/REGION ## add account num and region
+      
+      - name: Deploy quickstart
+        run: cd quickstart-aws-fintech-blueprint
+        run: npm install
+        run: npm run build && cdk deploy
