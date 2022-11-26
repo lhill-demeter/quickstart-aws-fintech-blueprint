@@ -21,6 +21,15 @@ jobs:
       - name: Install typescript
         run: npm install -g typescript
 
+      - name: Install aws cdl core npm
+        run: npm i @aws-cdk/core
+
+      - name: install ts node
+        run: npm i ts-node
+
+      - name: install node
+        run: npm i node
+
       - name: Configure AWS CDK
         run: npm install -g aws-cdk typescript
 
