@@ -1,5 +1,5 @@
 name: AWS quickstart deploy
-run-name: ${{githun.actor}} is deploying fintec quickstart
+run-name: ${{github.actor}} is deploying fintec quickstart
 on:
   push:
     branches:
