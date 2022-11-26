@@ -20,13 +20,15 @@ jobs:
 
       - name: Configure AWS CDK
         run: npm install -g aws-cdk typescript
-        run: cdk --version
 
       - name: Bootstrap AWS CDK stack
         run: export CDK_NEW_BOOTSTRAP=1
+      - name: Bootstrap AWS CDK stack pt2
         run: cdk bootstrap aws://${{secrets.AWS_ACCOUNT}}/${{secrets.AWS_REGION}}
-      
+
       - name: Deploy quickstart
         run: cd quickstart-aws-fintech-blueprint
+      - name: NPM install
         run: npm install
+      - name: NPM deploy
         run: npm run build && cdk deploy
